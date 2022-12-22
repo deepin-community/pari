@@ -1,0 +1,22 @@
+Index: pari-2.13.1~pre1/Configure
+===================================================================
+--- pari-2.13.1~pre1.orig/Configure
++++ pari-2.13.1~pre1/Configure
+@@ -45,13 +45,16 @@ pathspace=`echo $PATH | sed -e "s/$dir_s
+ 
+ for file in $_tools_list; do
+   x=`./locate $file '' $pathspace`
+-  eval $file=$x
++  eval $file=$file
+   case $x in
+ # support also DOS filesystems (hard drive prepended)
+    ?:/*|/*) echo ..."$file is $x";;
+       *) echo ..."I could not find $file." >&2;;
+   esac
+ done
++
++perl=/usr/bin/perl
++
+ if test -z "$zcat" -a -n "$gzip"; then zcat="$gzip -dc"; fi
+ 
+ ####################### CONFIGURE - ARCHITECTURE ############################

@@ -1,0 +1,8 @@
+misc/tex2mail   usr/bin
+doc/tex2mail.1  usr/share/man/man1/
+misc/color.dft  usr/share/doc/pari-gp/misc/
+misc/gpflog     usr/share/doc/pari-gp/misc/
+misc/gpalias    usr/share/doc/pari-gp/misc/
+misc/gprc.dft   usr/share/doc/pari-gp/misc/
+misc/xgp        usr/share/doc/pari-gp/misc/
+debian/pari-gp.xpm  usr/share/pixmaps/

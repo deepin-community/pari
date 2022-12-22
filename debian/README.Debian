@@ -1,0 +1,22 @@
+PARI/GP for Debian
+----------------------
+
+The PARI/GP computer algebra system come with a library, `libpari' and a
+command-line calculator named `gp'.
+
+PARI/GP was built with GNU MP support and POSIX thread support.
+
+The extended online help is available in pari-doc package.
+
+You can configure readline behavior under GP using application name "Pari-GP"
+in your .inputrc.
+
+For example adding
+--
+$if Pari-GP
+  set blink-matching-paren on
+$endif
+--
+to your .inputrc enable parens matching under GP.
+
+-- Bill Allombert <ballombe@debian.org>  Thu, 27 Mar 2014 12:48:08 +0100

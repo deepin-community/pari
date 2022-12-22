@@ -1,0 +1,192 @@
+#!/usr/bin/make -f 
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+# Adapted for the PARI Debian package by Bill Allombert 2001-2011
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+export FORCE_SOURCE_DATE = 1
+export SOURCE_DATE_EPOCH = $(shell date -d "$$(dpkg-parsechangelog -SDate)" +%s)
+export LC_ALL = C
+#Architecture 
+#PARI use sparcv8_micro for Debian/sparc and sparcv9 for Debian/sparc64
+#
+PARI_CPU:=$(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
+PARI_CPU:=$(if $(findstring $(PARI_CPU),sparc),sparcv8_micro,$(PARI_CPU))
+PARI_CPU:=$(if $(findstring $(PARI_CPU),sparc64),sparcv9,$(PARI_CPU))
+#Catch mips/mipsel
+PARI_CPU:=$(if $(findstring $(PARI_CPU),mipsel),mips,$(PARI_CPU))
+PARI_CPU:=$(if $(findstring $(PARI_CPU),mips64el),mips64,$(PARI_CPU))
+#Catch powerpc/powerpc64
+PARI_CPU:=$(if $(findstring $(PARI_CPU),powerpc64le),ppc,$(PARI_CPU))
+PARI_CPU:=$(if $(findstring $(PARI_CPU),powerpc64),ppc,$(PARI_CPU))
+#Catch s390/s390x
+PARI_CPU:=$(if $(findstring $(PARI_CPU),s390x),s390,$(PARI_CPU))
+PARI_SYSTEM:=$(shell dpkg-architecture -qDEB_HOST_GNU_SYSTEM)
+PARI_SYSTEM:=$(patsubst linux-gnu%,linux,$(PARI_SYSTEM))
+PARI_SYSTEM:=$(patsubst %-gnu,gnu%,$(PARI_SYSTEM))
+DEBIAN_ARCH:=$(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+
+CFLAGS_DBG = -g -O0 -Wall -fno-strict-aliasing
+
+DBGMAP = -fdebug-prefix-map=$(CURDIR)=.
+LDFLAGS = -Wl,-z,relro
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+CFLAGS_NOMAP = $(DBGCFLAGS)
+CFLAGS = $(CFLAGS_NOMAP) $(DBGMAP)
+CFLAGS_LTO = $(CFLAGS)
+else
+CFLAGS_NOMAP = -g -O3 -Wall -fomit-frame-pointer -fno-strict-aliasing
+CFLAGS = $(CFLAGS_NOMAP) $(DBGMAP)
+CFLAGS_LTO = $(CFLAGS) -flto
+endif
+
+export PATH := $(CURDIR)/debian/path/:$(PATH)
+
+ifeq ($(origin CC),default)
+CC := `which $(DEB_HOST_GNU_TYPE)-gcc`
+else
+CC := `which $(CC)`
+endif
+
+libpkg = libpari-gmp-tls7
+libtriplet = usr/lib/$(DEB_HOST_MULTIARCH)
+inctriplet = usr/include/$(DEB_HOST_MULTIARCH)
+
+build: build-arch 
+
+config: config-stamp
+config-stamp:
+	mkdir -p debian/path && ln -s $(CC) debian/path/cc
+	dh_testdir
+	CC=cc CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" DLLDFLAGS="$(LDFLAGS)" \
+	  ./Configure --mt=pthread\
+            --prefix=/usr --host=$(PARI_CPU)-$(PARI_SYSTEM) \
+            --libdir=/$(libtriplet) --sysdatadir=/$(libtriplet)/pari \
+            --includedir=/$(inctriplet) \
+            --builddir=obj-dyn --graphic=X11 --with-gmp 
+	CC=cc CFLAGS="$(CFLAGS_NOMAP)" LDFLAGS="$(LDFLAGS)" DLLDFLAGS="$(LDFLAGS)" \
+	  ./Configure --mt=pthread\
+            --prefix=/usr --host=$(PARI_CPU)-$(PARI_SYSTEM) \
+            --libdir=/$(libtriplet) --sysdatadir=/$(libtriplet)/pari \
+            --includedir=/$(inctriplet) \
+            --builddir=obj-cfg --graphic=X11 --with-gmp 
+	CC=cc CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" DLLDFLAGS="$(LDFLAGS)" \
+	  ./Configure --mt=pthread \
+            --prefix=/usr --host=$(PARI_CPU)-$(PARI_SYSTEM) \
+            --libdir=/$(libtriplet) --sysdatadir=/$(libtriplet)/pari \
+            --includedir=/$(inctriplet) \
+            --builddir=obj-sta --graphic=X11 --with-gmp
+	CC=cc CFLAGS="$(CFLAGS_LTO)" LDFLAGS="$(LDFLAGS)" DLLDFLAGS="$(LDFLAGS)" \
+	  ./Configure --mt=pthread \
+            --prefix=/usr --host=$(PARI_CPU)-$(PARI_SYSTEM) \
+            --libdir=/$(libtriplet) --sysdatadir=/$(libtriplet)/pari \
+            --includedir=/$(inctriplet) \
+            --builddir=obj-lto --graphic=X11 --with-gmp
+	CC=cc CFLAGS="$(CFLAGS_DBG)" LDFLAGS="$(LDFLAGS)" DLLDFLAGS="$(LDFLAGS)" \
+	  ./Configure --mt=pthread \
+            --prefix=/usr --host=$(PARI_CPU)-$(PARI_SYSTEM) \
+            --libdir=/$(libtriplet) --sysdatadir=/$(libtriplet)/pari \
+            --includedir=/$(inctriplet) \
+            --builddir=obj-dbg --graphic=X11 --with-gmp
+	touch config-stamp
+
+build-arch: build-arch-stamp
+build-arch-stamp: config-stamp
+	$(MAKE) -C obj-dyn lib-dyn #"LIBS=-lc -lm -lgmp"
+	$(MAKE) -C obj-sta lib-sta DLCFLAGS=
+	$(MAKE) -C obj-lto gp-sta RUNPTH=
+ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+	$(MAKE) -C obj-dyn gp-dyn
+	$(MAKE) dobench -C obj-dyn
+	$(MAKE) dobench -C obj-sta
+	$(MAKE) statest-all -C obj-dyn || true
+endif
+	touch build-arch-stamp
+
+build-indep: build-indep-stamp
+build-indep-stamp: config-stamp
+	$(MAKE) doc docpdf TEX=etex
+	touch build-indep-stamp
+clean:
+	dh_testdir
+	dh_testroot
+	if [ -f doc/Makefile ]; then $(MAKE) clean -C doc; fi
+	-rm -rf obj-dyn obj-sta obj-dbg obj-lto obj-cfg
+	-rm -f gp Makefile* examples/Makefile* 
+	-rm -f doc/Makefile doc/gphelp doc/paricfg.tex
+	-rm -f misc/tex2mail
+	-rm -f pari.log
+	-rm -f src/desc/pari.desc
+	-rm -rf debian/path
+	dh_clean -Xnumber_theoretical/core
+
+install: install-indep install-arch
+install-indep:
+	dh_testdir
+	dh_testroot
+	dh_prep -i -Xnumber_theoretical/core
+	dh_installdirs -i
+	$(MAKE) -C obj-dyn install-doc install-docpdf DESTDIR=`pwd`/debian/pari-doc/
+	dh_install -i
+	dh_installman -i
+	dh_installexamples -i
+
+install-arch:
+	dh_testdir
+	dh_testroot
+	dh_prep -a -Xnumber_theoretical/core
+	dh_installdirs -a
+	$(MAKE) -C obj-lto install-bin-sta install-man LIBS="-lm" RLLIBS=-lreadline STRIP=true RUNPTH_FINAL= DESTDIR=`pwd`/debian/pari-gp
+	rm debian/pari-gp/usr/share/man/man1/gphelp.1
+	test ! -d debian/pari-gp/usr/lib
+	$(MAKE) -C obj-dyn install-lib-dyn DESTDIR=`pwd`/debian/$(libpkg)
+	$(MAKE) -C obj-sta install-lib-sta DESTDIR=`pwd`/debian/libpari-dev
+	$(MAKE) -C obj-dyn install-include install-cfg DESTDIR=`pwd`/debian/libpari-dev
+	mv debian/$(libpkg)/$(libtriplet)/libpari.so debian/libpari-dev/$(libtriplet)
+	dh_install -a
+	sed -ne '/^TOP=/ !p' < obj-cfg/pari.cfg > obj-cfg/pari.cfg.deb
+	install -p -m 644 obj-cfg/pari.cfg.deb debian/libpari-dev/$(libtriplet)/pari/pari.cfg
+	sed -ne '/^TOP=/ !p' < obj-dbg/pari.cfg > obj-dbg/pari.cfg.deb
+	install -p -m 644 obj-dbg/pari.cfg.deb debian/libpari-dev/$(libtriplet)/pari/pari.cfg.dbg
+	install -p -m 644 debian/misc-readme debian/pari-gp/usr/share/doc/pari-gp/misc/README.Debian
+	install -p -m 644 debian/gprc.dft debian/pari-gp/etc/gprc
+	dh_strip -a
+	dh_makeshlibs -a -V '$(libpkg)'
+	dh_shlibdeps -a -l debian/$(libpkg)/$(libtriplet) -L$(libpkg)
+	dh_installexamples -a
+	rm debian/pari-gp/usr/share/doc/pari-gp/examples/Makefile
+	install -p -m 644 obj-cfg/Makefile.examples debian/pari-gp/usr/share/doc/pari-gp/examples/Makefile
+
+#Must not depend on anything. This is to be called by binary-arch/binary-indep
+# in another 'make' thread.
+binary-common:
+	dh_testdir
+	dh_testroot
+	dh_installdocs -p pari-gp CHANGES-2.10 CHANGES-2.8
+	dh_installmenu
+	dh_installchangelogs CHANGES
+	dh_link
+	dh_compress -Xparimacro
+	dh_fixperms
+	dh_installdeb
+	dh_perl
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+# Build architecture independant packages using the common target.
+binary-indep: build-indep install-indep
+	$(MAKE) -f debian/rules DH_OPTIONS=-i binary-common
+
+# Build architecture dependant packages using the common target.
+binary-arch: build-arch install-arch
+	$(MAKE) -f debian/rules DH_OPTIONS=-a binary-common
+
+binary: binary-arch binary-indep
+.PHONY: clean binary-indep binary-arch binary config 
+.PHONY: install install-indep install-arch 
+.PHONY: build build-arch build-indep

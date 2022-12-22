@@ -1,0 +1,11 @@
+Document: pari-doc-refcard
+Title: PARI/GP Reference Card
+Author: The PARI Group
+Abstract: This is a four-pages reference card of the GP functions.
+Section: Science/Mathematics
+
+Format: dvi
+Files: /usr/share/doc/pari-doc/doc/refcard*.dvi
+
+Format: pdf
+Files: /usr/share/doc/pari-doc/doc/refcard*.pdf

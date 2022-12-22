@@ -1,0 +1,13 @@
+Document: pari-doc-libpari
+Title: User's Guide to the PARI library
+Author: The PARI Group
+Abstract: The first part of this book introduces the general concepts of PARI
+ programming and describe useful general purpose functions. The second
+ part describes all available public low-level functions.
+Section: Science/Mathematics
+
+Format: dvi
+Files: /usr/share/doc/pari-doc/doc/libpari.dvi
+
+Format: pdf
+Files: /usr/share/doc/pari-doc/doc/libpari.pdf

@@ -1,0 +1,94 @@
+Source: pari
+Build-Depends: debhelper-compat (= 12), libreadline-dev, libx11-dev, libgmp-dev,
+               pari-galdata, pari-elldata, pari-seadata, pari-galpol
+Build-Depends-Indep: texlive-base, texlive-latex-base
+Section: math
+Priority: optional
+Maintainer: Bill Allombert <ballombe@debian.org>
+Standards-Version: 4.5.0
+Homepage: http://pari.math.u-bordeaux.fr
+ 
+Package: pari-gp
+Architecture: any
+Section: math
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: pari-doc, pari-galdata, pari-elldata, pari-seadata
+Suggests: pari-gp2c, pari-galpol
+Description: PARI/GP Computer Algebra System binaries
+ PARI/GP is a widely used computer algebra system designed for fast
+ computations in number theory (factorizations, algebraic number theory,
+ elliptic curves...), but also contains a large number of other useful
+ functions to compute with mathematical entities such as matrices,
+ polynomials, power series, algebraic numbers etc., and a lot of
+ transcendental functions. PARI is also available as a C library to allow
+ for faster computations.
+ .
+ Originally developed by Henri Cohen and his co-workers (University Bordeaux I,
+ France), PARI is now under the GPL and maintained by Karim Belabas
+ with the help of many volunteer contributors.
+ .
+ This package contains the GP calculator.
+
+Package: libpari-dev
+Architecture: any
+Section: libdevel
+Provides: libpari-gmp-tls7-dev
+Depends: libpari-gmp-tls7 (= ${binary:Version}), libc-dev, ${misc:Depends}
+Suggests: libpari-gmp-tls7-dbgsym, pari-gp2c
+Multi-Arch: same
+Description: PARI/GP Computer Algebra System development files
+ PARI/GP is a widely used computer algebra system designed for fast
+ computations in number theory (factorizations, algebraic number theory,
+ elliptic curves...), but also contains a large number of other useful
+ functions to compute with mathematical entities such as matrices,
+ polynomials, power series, algebraic numbers etc., and a lot of
+ transcendental functions. PARI is also available as a C library to allow
+ for faster computations.
+ .
+ Originally developed by Henri Cohen and his co-workers (University Bordeaux I,
+ France), PARI is now under the GPL and maintained by Karim Belabas
+ with the help of many volunteer contributors.
+ .
+ This package contains the include files and static library.
+
+Package: libpari-gmp-tls7
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: PARI/GP Computer Algebra System shared library
+ PARI/GP is a widely used computer algebra system designed for fast
+ computations in number theory (factorizations, algebraic number theory,
+ elliptic curves...), but also contains a large number of other useful
+ functions to compute with mathematical entities such as matrices,
+ polynomials, power series, algebraic numbers etc., and a lot of
+ transcendental functions. PARI is also available as a C library to allow
+ for faster computations.
+ .
+ Originally developed by Henri Cohen and his co-workers (University Bordeaux I,
+ France), PARI is now under the GPL and maintained by Karim Belabas
+ with the help of many volunteer contributors.
+ .
+ This package contains the shared library built with GNU MP support.
+
+Package: pari-doc
+Architecture: all
+Section: doc
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Recommends: pari-gp,${perl:Depends},texlive-base
+Description: PARI/GP Computer Algebra System documentation
+ PARI/GP is a widely used computer algebra system designed for fast
+ computations in number theory (factorizations, algebraic number theory,
+ elliptic curves...), but also contains a large number of other useful
+ functions to compute with mathematical entities such as matrices,
+ polynomials, power series, algebraic numbers etc., and a lot of
+ transcendental functions. PARI is also available as a C library to allow
+ for faster computations.
+ .
+ Originally developed by Henri Cohen and his co-workers (University Bordeaux I,
+ France), PARI is now under the GPL and maintained by Karim Belabas
+ with the help of many volunteer contributors.
+ .
+ This package contains the documentation and the extended online help.

@@ -1,0 +1,12 @@
+Document: pari-doc-user
+Title: User's Guide to PARI/GP
+Author: The PARI Group
+Abstract: This manual describe the interface to the PARI library and the GP
+ calculator.
+Section: Science/Mathematics
+
+Format: dvi
+Files: /usr/share/doc/pari-doc/doc/users.dvi
+
+Format: pdf
+Files: /usr/share/doc/pari-doc/doc/users.pdf

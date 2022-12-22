@@ -1,0 +1,5 @@
+?package(pari-gp):needs="text" section="Applications/Science/Mathematics" \
+  title="PARI/GP"\
+  command="/usr/bin/gp"\
+  icon="/usr/share/pixmaps/pari-gp.xpm"\
+  longtitle="PARI/GP Number Theory-oriented computer algebra system"

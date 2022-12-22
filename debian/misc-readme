@@ -1,0 +1,13 @@
+This directory contains:
+
+color.dft: color ressources to use with color_xterm.
+gpflog   : a script to filter out escape sequences from a gp log file
+gpalias  : useful aliases to be read from the gprc
+gprc.dft : a sample gprc (generic)
+xgp      : a simple script starting gp in a beefed-up xterm.
+
+Original directory contains also
+tex2mail : installed in /usr/bin/tex2mail
+gprc.dos : removed
+
+Bill Allombert <ballombe@debian.org>  Sun, 08 May 2011 15:13:57 +0200

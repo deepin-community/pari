@@ -1,0 +1,3 @@
+# Site				Directory	Pattern		Version	Script
+version=3
+opts=pgpsigurlmangle=s/$/.asc/ https://pari.math.u-bordeaux.fr/pub/pari/unix/pari-(.*)\.tar\.gz	debian	uupdate

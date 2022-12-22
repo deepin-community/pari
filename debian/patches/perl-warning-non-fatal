@@ -1,0 +1,12 @@
+Index: pari-2.13.1~pre1/src/desc/doc_make
+===================================================================
+--- pari-2.13.1~pre1.orig/src/desc/doc_make
++++ pari-2.13.1~pre1/src/desc/doc_make
+@@ -1,6 +1,6 @@
+ #!/usr/bin/perl
+ BEGIN { @INC=(".",@INC); }
+-use warnings FATAL => 'all';
++use warnings;
+ use strict;
+ use PARI::822;
+ 

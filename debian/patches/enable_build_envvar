@@ -1,0 +1,21 @@
+Description: Change Configure to honor CFLAGS.
+ Change the Configure system to use the value of the environment variables
+ CFLAGS (when set) so that we can set it in debian/rules.
+
+Author: Bill Allombert <ballombe@debian.org>
+Last-Update: 2011-06-21
+Index: pari-2.7.0/config/get_cc
+===================================================================
+--- pari-2.7.0.orig/config/get_cc	2014-03-20 09:59:28.000000000 +0100
++++ pari-2.7.0/config/get_cc	2014-03-26 23:43:58.561525695 +0100
+@@ -147,7 +147,9 @@
+   gcov)      suffix=.gcov; cflags="$GCOVFLAGS $cflags";;
+ esac
+ 
+-CFLAGS="$cflags $CFLAGS $CPPFLAGS"
++if test "${CFLAGS+set}" != "set" ; then
++  CFLAGS="$cflags $CFLAGS $CPPFLAGS"
++fi
+ if test "$fastread" != yes; then
+   echo $n ..."With which flags ? $c"
+   dflt=$CFLAGS; rep=; . ./myread

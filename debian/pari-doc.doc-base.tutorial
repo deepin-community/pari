@@ -1,0 +1,12 @@
+Document: pari-doc-tutorial
+Title: A Tutorial for PARI/GP
+Author: The PARI Group
+Abstract: This booklet is intended to be a guided tour and a tutorial to the GP
+ calculator.
+Section: Science/Mathematics
+
+Format: dvi
+Files: /usr/share/doc/pari-doc/doc/tutorial.dvi
+
+Format: pdf
+Files: /usr/share/doc/pari-doc/doc/tutorial.pdf

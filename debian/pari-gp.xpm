@@ -1,0 +1,36 @@
+/* XPM */
+static char *pari-gp-tiny[] = {
+/* width height num_colors chars_per_pixel */
+"    32    16       13            1",
+/* colors */
+". c #ffffff",
+"# c #006cf8",
+"a c #20d010",
+"b c #a0d3ff",
+"c c #88ff68",
+"d c #009900",
+"e c #000000",
+"f c #9f9f9f",
+"g c #0000cc",
+"h c #b0032b",
+"i c #bfbfbf",
+"j c #ffc1b9",
+"k c #f71814",
+/* pixels */
+"................................",
+"...........#a...................",
+"..........#bcd..................",
+"eeeeef....#bcd....eeeeef...eeee.",
+".ee..ef...gbcd.....ee..ef...ee..",
+".ee..ee..#bhhca....ee..ee...ee..",
+".ee..ef..g.hh.d....ee..ef...ee..",
+".eeeef...hhhhhh....eeeef....ee..",
+".ee.....bhhhhhhc...eeiei....ee..",
+".ee.....g..hh..d...ee.iei...ee..",
+".ee....bg.bhhc.dc..ee..iei..ee..",
+"eeee...gb.b..c.cd.eeee.eeefeeee.",
+"......bg..b..c..dc..............",
+".....#gb.bb..cc.ad..............",
+".....g#..bb..cc.c...............",
+"................................"
+};

@@ -1,0 +1,704 @@
+pari (2.13.3-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Fix broken symlink /usr/share/doc/pari-gp/examples/Makefile. 
+    Thanks Andreas Beckmann. Closes: #985698
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 25 Oct 2021 18:55:44 +0200
+
+pari (2.13.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * patch fix-gzip-path replaced by no_harcode_path
+  * debian/rules:
+    - test option nocheck instead of notest. Thanks John Scott.
+    - Do not override CC variable. Closes: #979523. Thanks John Scott
+  * debian/watch: use format 3
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 25 Jan 2021 11:19:31 +0100
+
+pari (2.13.0-2) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Bill Allombert <ballombe@debian.org>  Wed, 28 Oct 2020 17:38:43 +0100
+
+pari (2.13.0-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 19 Oct 2020 23:30:16 +0200
+
+pari (2.11.4-3) unstable; urgency=medium
+
+  * debian/rules:
+    - do not set -fdebug-prefix-map in pari.cfg for reproducibility.
+
+ -- Bill Allombert <ballombe@debian.org>  Sat, 27 Jun 2020 18:40:54 +0200
+
+pari (2.11.4-2) unstable; urgency=medium
+
+  * debian/rules:
+    - CFLAGS: use -fdebug-prefix-map
+    - Correctly build libpari.a without -flto
+
+ -- Bill Allombert <ballombe@debian.org>  Sat, 20 Jun 2020 11:53:44 +0200
+
+pari (2.11.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/rules:
+    - Compile gp with -flto. This alleviates performance issues caused by
+      the use of thread local storage.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 17 Apr 2020 15:57:09 +0200
+
+pari (2.11.4~pre1-1) unstable; urgency=low
+
+  * New upstream prerelease
+    - Fix upstream bug #2208 (incorrect sign of units). Closes: #953633.
+  * debian/control:
+    - Bump Standards-Version to 4.5.0.
+    - Build-Depends on debhelper-compat (= 12)
+  * debian/compat: removed
+  * debian/rules: install CHANGES-2.10 too
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 03 Apr 2020 12:00:22 +0200
+
+pari (2.11.3-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 03 Mar 2020 09:31:47 +0000
+
+pari (2.11.2-2) unstable; urgency=medium
+
+  * Source-only upload 
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 12 Jul 2019 10:53:51 +0200
+
+pari (2.11.2-1) unstable; urgency=medium
+
+  * New upstream release
+  * patch fix-parapply: removed, applied usptream
+  * debian/gprc.dft: add threadsizemax
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 08 Jul 2019 18:27:21 +0200
+
+pari (2.11.1-2) unstable; urgency=medium
+
+  * New patch
+    - fix-parapply: from upstream: fix memory corruption in parapply
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 25 Jan 2019 17:50:12 +0100
+
+pari (2.11.1-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Fix F19: fix crash of graphic engine. (Closes: #910775)
+    - new patch fix-gzip-path: do not hard code path to gzip.
+      to support merged /usr system. (Closes: #914089)
+  * debian/watch, debian/upstream/signing-key.asc:
+    - enable OpenPGP verification of upstream source with uscan.
+      Thanks John Scott. (Closes: #905458)
+  * debian/control:
+    - pari-doc: set Multi-Arch: foreign
+    - Bump Standards-Version to 4.2.1.
+
+ -- Bill Allombert <ballombe@debian.org>  Sun, 02 Dec 2018 17:05:03 +0100
+
+pari (2.11.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/control:
+    - Build-Depends-Indep on texlive-latex-base
+    - Bump Standards-Version to 4.1.5.
+  * debian/watch: use https URL.
+
+ -- Bill Allombert <ballombe@debian.org>  Thu, 19 Jul 2018 00:39:32 +0200
+
+pari (2.9.5-1) unstable; urgency=medium
+
+  * New upstream release
+    - Fix problem when converting integers to double, especially on mips.
+      Closes : #889674. Thanks Tobias Hansen 
+  * debian/rules:
+   - run the full test-suite (experimental).
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 18 May 2018 15:43:28 +0200
+
+pari (2.9.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/rules:
+    - Fix FORCE_SOURCE_DATE typo
+  * debian/control:
+    - Bump Standards-Version to 4.1.2.
+    - Remove Conflicts with libpari1/libpari1-dev
+    - Replace Suggests: libpari-dbg by debugsym variant
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 19 Dec 2017 12:08:42 +0100
+
+pari (2.9.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/control:
+    - Bump Standards-Version to 4.0.0.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 14 Jul 2017 00:38:06 +0200
+
+pari (2.9.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/rules:
+    - Add CPU mapping for mips64el
+    - Install upstream changelog correctly
+  * debian/pari-doc.doc-base.*:
+    - PDF files are not compressed anymore
+
+ -- Bill Allombert <ballombe@debian.org>  Thu, 01 Dec 2016 10:38:37 +0100
+
+pari (2.9.0-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #835027)
+  * debian/pari-doc.links:
+    - Add link to example dir (Closes: #836309)
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 01 Nov 2016 19:57:18 +0100
+
+pari (2.9.0~pre1-1) experimental; urgency=medium
+
+  * Upstream prerelease (based on pari 2.8.1)
+    - patch perl-no-dot-in-inc removed: merged upstream
+  * Replace libpari-dbg by dbgsym packages.
+  * Move to debhelper v9
+
+ -- Bill Allombert <ballombe@debian.org>  Sat, 22 Oct 2016 18:50:10 +0200
+
+pari (2.7.6-2) unstable; urgency=medium
+  
+  * New patch: perl-no-dot-in-inc from upstream
+    - Fix "FTBFS with '.' removed from perl's @INC":
+    (Closes: #835353) Thanks Gregor Herrmann for the help!
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 05 Sep 2016 22:18:07 +0200
+
+pari (2.7.6-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/rules: set SOURCE_DATE_EPOCH and LC_ALL
+  * debian/control:
+    - Bump Standards-Version to 3.9.7.
+  * debian/rules:
+    - Remove TOP from pari.cfg/pari.cfg.dbg
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 21 Jun 2016 12:40:52 +0200
+
+pari (2.7.5-1) unstable; urgency=low
+
+  * New upstream release
+    - patch fix-gphelp-regexps, fix-docmake-regexps: applied upstream
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 09 Nov 2015 21:47:40 +0100
+
+pari (2.7.4-2) unstable; urgency=low
+
+  * Apply upstream fix for perl 5.22 compatibility:
+    - perl-warning-non-fatal: make perl warning non fatal.
+    - fix-gphelp-regexps, fix-docmake-regexps: 
+      Closes: #789735. Thanks Dominic Hargreaves
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 31 Jul 2015 00:43:08 +0200
+
+pari (2.7.4-1) unstable; urgency=low
+
+  * New upstream release. 
+    - Fix GET_SEP_SIZE. Closes: #763303. Thanks Jerome Benoit
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 19 Jun 2015 17:22:05 +0200
+
+pari (2.7.3-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control:
+    - Bump Standards-Version to 3.9.6.
+  * debian/rules:
+    - use gzip --no-name
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 27 Apr 2015 14:37:19 +0200
+
+pari (2.7.2-1) unstable; urgency=low
+
+  * New upstream release
+   - Fix: "incorrect rounding in mulrr/divrr for one-word precision reals"
+     Closes: #751042
+  * debian/rules:
+    - Add CPU mapping for ppc64el
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 19 Sep 2014 11:12:37 +0200
+
+pari (2.7.1-1) unstable; urgency=low
+
+  * New bugfix upstream release
+  * debian/rules:
+    - run the test-suite for the shared library also
+    - use dh_prep instead of dh_clean -k
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 16 May 2014 19:09:00 +0200
+
+pari (2.7.0-2) unstable; urgency=medium
+
+  * debian/rules:
+    - libpari.so ended up in the wrong package.
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 21 Apr 2014 14:36:38 +0200
+
+pari (2.7.0-1) unstable; urgency=low
+
+  * New upstream release
+    - patch fix_pari_init_functions: removed
+  * debian/control:
+    - libpari-gmp3 replaced by libpari-gmp-tls4
+    - Bump Standards-Version to 3.9.5.
+  * Add POSIX thread support:
+    + debian/rules:
+      - Add --mt=pthread to Configure
+      - link gp statically with libpari to avoid performance penalty
+        caused by TLS.
+  * Multiarchify libpari-dev:
+    - make libpari-dev Multi-Arch: same
+  * debian/rules:
+    - clean up clean target
+    - move pari.dsc and header files to /usr/include/triplet/
+    - Add -Wl,-z,relro to LDFLAGS
+
+ -- Bill Allombert <ballombe@debian.org>  Thu, 27 Mar 2014 00:18:08 +0100
+
+pari (2.5.5-1) unstable; urgency=low
+
+  * New upstream release
+    - Fix detection of multiarch GMP.
+  * debian/control:
+    - Bump Standards-Version to 3.9.4.
+  * debian/rules:
+    - Add CPU mapping for s390x, sparc64 and ppc64
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 24 Sep 2013 20:49:44 +0200
+
+pari (2.5.4-1) unstable; urgency=low
+
+  * New upstream release. Closes: #703116
+    - Fix gcc-4.7 support. Patch gcc-4.7-linear-fix removed.
+    - Update tex2mail. Patch tex2mail-Getopt-Long removed.
+  * Multiarchify libpari-gmp3. 
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 13 May 2013 14:31:49 +0200
+
+pari (2.5.1-2) unstable; urgency=high
+
+  * New patch gcc-4.7-linear-fix to fix build failure with gcc-4.7.
+    Closes: 673308
+  * debian/control:
+    + Bump Standards-Version to 3.9.3.
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 04 Jun 2012 10:11:20 +0200
+
+pari (2.5.1-1) unstable; urgency=low
+
+  * New upstream release. This release
+    - Fix multiarch support: Patch fix_multiarch_support removed.
+      This also takes care of the missing GMP version in the banner.
+  * debian/rules:
+   - Fix detection of powerpc ABI.
+   - Generate pari.cfg.dbg and add it to libpari-dev (Useful for gp2c-dbg).
+  * New patch:
+    - tex2mail-Getopt-Long: change tex2mail to use Getopt::Long instead of 
+      perl4 module.
+  * debian/control:
+    - No more Build-Depends on libncurses5-dev
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 06 Feb 2012 23:00:43 +0100
+
+pari (2.5.0-2) unstable; urgency=low
+
+  * New patches: 
+    - fix_multiarch_support (supercede find_libX11_multiarch):
+      work-around lack of multiarch support in locatelib
+    - fix_pari_init_functions:
+      work-around compiler issue on sparc (see #635214)
+  * debian/control
+    - replace pari-extra by pari-galdata, pari-elldata, pari-seadata
+      and pari-galpol.
+
+ -- Bill Allombert <ballombe@debian.org>  Sun, 11 Sep 2011 17:54:50 +0200
+
+pari (2.5.0-1) unstable; urgency=low
+
+  * New upstream release
+    - patch enable_build_envvar reduced to CFLAGS only.
+    - patch install-docpdf removed: applied upstream.
+    - patch refcard-special-papersize removed: applied upstream.
+    - libpari soname bumped to 3.
+    - emacs directory removed.
+    - patch find_libX11_multiarch added: fix X11 detection.
+  * debian/control:
+    + libpari2-gmp replaced by libpari3-gmp.
+    + Bump Standards-Version to 3.9.2.
+  * debian/rules: adjust for libpari3-gmp.
+    - Do not use -D_REENTRANT
+  * debian/gprc.dft:
+    - add histfile, remove strictmatch.
+  * debian/libpari3-gmp.postinst: 
+    - removed. This is handled by dh_makeshlibs.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 22 Jul 2011 23:24:17 +0200
+
+pari (2.3.5-2) unstable; urgency=low
+
+  * debian/control:
+    + Bump Standard-Version to 3.9.1.
+    + Build-Depends on libgmp-dev instead of libgmp3-dev.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 18 Mar 2011 09:21:13 +0100
+
+pari (2.3.5-1) unstable; urgency=low
+
+  * New upstream release
+    + 11797: make sure the build fails if gp cannot be installed.
+    + 11799: Add gnu* to systems supporting intra-library dependencies.
+  * Move to new source format 3.0 (quilt). Patches applied:
+    - enable_build_envvar
+    - install-docpdf
+  * New patch: 
+    - refcard-special-papersize: add \special{papersize=...} to doc/refcard.tex
+    Closes: 461814. Thanks Vincent Lefevre.
+  * debian/rules:
+    - link gp with '-ld -lm' to allow linking with --no-add-needed.
+    Closes: 556049. Thanks Peter Fritzsche.
+  * debian/control:
+    + Bump Standard-Version to 3.8.4.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 05 Feb 2010 12:33:29 +0100
+
+pari (2.3.4-3) unstable; urgency=low
+
+  * debian/control:
+    + Build-depends on libreadline-dev instead of libreadline5-dev:
+      Closes: 553823. Thanks Matthias Klose.
+    + Bump Standard-Version to 3.8.3.
+
+ -- Bill Allombert <ballombe@debian.org>  Wed, 04 Nov 2009 16:05:45 +0100
+
+pari (2.3.4-2) unstable; urgency=low
+
+  * Apply upstream fix for kfreebsd support: Closes: #537902
+    + 11797: make sure the build fails if gp cannot be installed.
+    + 11799: Add gnu* to systems supporting intra-library dependencies.
+  * debian/control:
+    + Bump Standard-Version to 3.8.2.
+    + move libpari-dbg to section debug.
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 21 Jul 2009 16:58:08 +0200
+
+pari (2.3.4-1) unstable; urgency=low
+
+  * New bugfix upstream release:
+    + Fix upstream bug #741: Closes: #473810
+     "mathnf(a,1) could have negative entries if non-trivial kernel"
+    + No more ship useless files TODO and CVS.txt
+    + Bump libpari shlibs to (>= 2.3.4-1).
+  * debian/control:
+    + Bump Standard-Version to 3.8.0.
+  * doc-base files: update section for new doc-base policy.
+  * debian/rules: 
+    - Work-around for silly DEB_HOST_GNU_SYSTEM on armel. Closes: #491722.
+      Thanks Timothy G Abbott.
+
+ -- Bill Allombert <ballombe@debian.org>  Wed, 23 Jul 2008 09:59:11 +0200
+
+pari (2.3.3-2) unstable; urgency=low
+
+  * Ship documentation in PDF. Closes: #361431.
+    Thanks Yann Dirson and Vincent Lefèvre.
+  * Fix PARI_CPU for armel.
+
+ -- Bill Allombert <ballombe@debian.org>  Sat, 19 Jan 2008 20:04:46 +0100
+
+pari (2.3.3-1) unstable; urgency=low
+
+  * New upstream release
+  * Update menu entry to new menu structure.
+  * debian/rules clean:
+    + Check if doc/Makefile exists before doing make -C doc clean 
+  * debian/control:
+    + Bump Standard-Version to 3.7.3.
+    + Move libpari-dbg to Priority: extra.
+    + Move Homepage outside the description and to the source section.
+    + Replace Source-Version by binary:version
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 07 Jan 2008 13:09:31 +0100
+
+pari (2.3.2-1) unstable; urgency=low
+
+  * New upstream release. Closes: #418601
+    - remove benchmark fix patch applied upsteam.
+  * Apply patch from Mark Wooding to not delete pari.el at build time.
+    Closes: #411140
+  * debian/control: update for texlive:
+    + Build-Depends on texlive-base instead of tetex-*.
+    + pari-doc Recommends texlive-base instead of tetex-extra.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 13 Apr 2007 12:27:15 +0200
+
+pari (2.3.1-2) unstable; urgency=low
+
+  * Apply patch to fix benchmark on 64 bit plateforms.
+
+ -- Bill Allombert <ballombe@debian.org>  Sat,  7 Oct 2006 15:19:08 +0200
+
+pari (2.3.1-1) unstable; urgency=low
+
+  * New upstream bugfix release
+    - fix incorrect use of mp_set_memory_functions that break programs using 
+      both PARI and MPFR. Thanks Sylvain Chevillard (PARI bug #484).
+    - one extra symbol added (padic_sqrt, undocumented).
+  * debian/watch: fix the regexp.
+  * debian/rules:
+   + dh_makeshlibs: call with -V '$(libpkg) (>= 2.3.1-1)'
+   + do not link gp with -lncurses -lgmp and do not link libpari with -ld.
+     Thanks Christian Aichinger for checklib.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri,  6 Oct 2006 13:00:00 +0200
+
+pari (2.3.0-2) unstable; urgency=low
+
+  * debian/rules:
+   + Fix PARI_SYSTEM for kfreebsd-gnu. Closes: #341433.
+   + Fix PARI_CPU for armeb.
+   + Set EXTRAMODLDFLAGS to "-lc -lm -lpari" so that gp2c do not need to 
+     depend uselessly on libgmp3-dev.
+  * debian/control
+   + libpari-dev now suggests pari-gp2c
+  * config/get_modld:
+   + Patch to preserve EXTRAMODLDFLAGS if set.
+
+ -- Bill Allombert <ballombe@debian.org>  Wed, 28 Jun 2006 18:44:45 +0200
+
+pari (2.3.0-1) unstable; urgency=low
+
+  * New upstream release. Closes: #294931
+    + Add support for GNU/kFreeBSD. Closes: #341433
+    + Fix the URL in the manpage. Closes: #343625
+    + Fix the refcard text overflow. Closes: #361440
+    + No more include non-PIC asm code.
+    + Build libpari with GMP support.
+    + The libpari manual was split out of the main PARI/GP manual.
+  * Move to debhelper v5 to use dh_strip --dbg-package.
+  * config/get_cc, config/get_dlcflags:
+    + Patch to preserve CFLAGS and DLCFLAGS.
+      This is easier/safer than working around upstream behaviour.
+  * debian/control:
+    + Build-Depends on debhelper (>= 5)
+    + pari-gp now suggests pari-gp2c
+    + libpari1 replaced by libpari2-gmp.
+    + Add libpari-dbg debugging package for use with gp2c-dbg.
+    + Bump Standards-Version to 3.7.2.
+    + Description: Remove outdated location.
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 30 May 2006 22:14:14 +0200
+
+pari (2.1.7-2) unstable; urgency=low
+
+  * debian/config_build: 
+    + Do not build with -fno-frame-pointer on m68k to avoid gcc ICE.
+
+ -- Bill Allombert <ballombe@debian.org>  Thu, 13 Oct 2005 13:01:29 +0200
+
+pari (2.1.7-1) unstable; urgency=low
+
+  * New upstream release
+    + This release adds support for gcc-4.0. Closes: #324568.
+  * debian/copyright: 
+    + Update URL.
+    + Add full copyright statement from README
+    + Update FSF address.
+  * debian/control:
+    + Bump Standards-Version to 3.6.2
+    + Build-Depends on libx11-dev instead of xlibs-dev.
+    + Switch to readline5. Closes: #326310. Thanks Matthias Klose.
+    + Fix typo in description. Closes: #292155. Thanks Jörg Sommer.
+  * debian/config_build: Build with -O3 on arm for fun.
+  * debian/rules:
+    + Discard the -gnu suffix from newer dpkg that is not recognized here.
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 20 Sep 2005 17:10:42 +0200
+
+pari (2.1.6-3) unstable; urgency=low
+
+  * Avoid compiler path to be hard-coded in pari.cfg.
+  * Add missing # in comment in debian/config_build.
+  * Build with -fno-strict-aliasing.
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 11 Jan 2005 16:26:09 +0100
+
+pari (2.1.6-2) unstable; urgency=low
+
+  * Rebuild with -O2 on arm.
+
+ -- Bill Allombert <ballombe@debian.org>  Sun, 12 Dec 2004 13:00:22 +0100
+
+pari (2.1.6-1) unstable; urgency=low
+
+  * New bugfix upstream release. Including:
+    + Fix for "wrong error message for large primelimit" reported by Stephan
+      Niemz. Closes #272886
+    + Support for building shared libraries on GNU/Hurd.
+  * Fix paths in doc-base files, thanks dwww.
+  * debian/rules: Remove Odos/paricfg.h on clean.
+  * Apply patch to fix long* to int* missing conversion on 64bit archs.
+  * Fix Debian-to-PARI architecture mapping.
+  * debian/watch: update to version 2 and use new URL.
+  * debian/control: Add Homepage link.
+  * libpari1-dev: install dft.Config.in as usr/lib/pari/pari.cfg to
+    align with current gp2c releases.
+
+ -- Bill Allombert <ballombe@debian.org>  Thu,  9 Dec 2004 15:28:13 +0100
+
+pari (2.1.5-5) unstable; urgency=low
+
+  * Bump standard version to 3.6.1.
+  * Build-Depends on xutils (for xmkmf) to make sure X11 graphics are enabled.
+  * Use `PARI/GP' in menu entry since basesection is implemented in menu.
+  * description: Rename Université to University to avoid trouble with
+    non latin-1 charsets. Thanks Denis Barbier.
+  * Build with -O3 on arm. Thanks Matthias Klose.
+  * Make sure build fails if make bench fails with BUG.
+  * Implement "notest" DEB_BUILD_OPTIONS.
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 29 Jul 2003 20:02:24 +0200
+
+pari (2.1.5-4) unstable; urgency=low
+
+  * Rebuild with -O2 on arm.
+  
+ -- Bill Allombert <ballombe@debian.org>  Thu, 19 Jun 2003 20:41:50 +0200
+
+pari (2.1.5-3) unstable; urgency=low
+
+  * Bump standard version to 3.5.10.0.
+  * Reduce icon size to 32x16.
+  * Build libpari.so with -fPIC on all arch. This will not lead to PIC code on
+    all arch, but this should allow prelinking.
+  * Run test suite after build.
+
+ -- Bill Allombert <ballombe@debian.org>  Sat, 14 Jun 2003 21:23:32 +0200
+
+pari (2.1.5-2) unstable; urgency=low
+
+  * Alias build to build-arch until dpkg-buildpackage know about build-arch.
+  * Force alpha to define c-code.
+
+ -- Bill Allombert <ballombe@debian.org>  Tue,  8 Apr 2003 16:00:38 +0200
+
+pari (2.1.5-1) unstable; urgency=low
+
+  * Rebuild with new gcc/libc/debhelper.
+  * Move libpari1-dev to section libdevel. 
+  * Remove use of gcc-3.0 on ia64 since gcc-3.2 is the default.
+  * Remove build -O2 on hppa.
+  * Clean up debian/rules.
+  * Build with -g by default.
+  * Implement DEB_BUILD_OPTIONS as per new policy.
+  * Bump standard version to 3.5.9.
+  * Use debian/compat (level 4).
+  * Remove debian/pari-gp.conffiles.
+  * Remove dot in short description.
+  * Split Build-Depends-Indep from Build-Depends.
+  * Use --builddir to avoid having to guess the builddir
+  * Use config/version to avoid hard-coding the version.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri,  4 Apr 2003 21:14:49 +0200
+
+pari (2.1.4-2) unstable; urgency=low
+
+  * The "Bye-bye Woody, hello Sarge!" release.
+  * Build-Depends on xlibs-dev instead of xlib6g-dev. 
+  * Rebuild with readline 4.3 to shut up linker warning. Closes: #165608
+  * Build with default gcc on ARM, since gcc-2.95.4 is fixed.
+  * Move pari-gp.xpm to /usr/share/pixmaps (was in /usr/share/icons).
+  * Do not compress .el files.
+  * Fix path in man pages (gp.1, gphelp.1).
+  * Switch to debhelper v4 and to dh_install instead of dh_movefiles.
+    Thanks Joey Hess!
+
+ -- Bill Allombert <ballombe@debian.org>  Wed, 30 Oct 2002 10:56:27 +0100
+
+pari (2.1.4-1) unstable; urgency=low
+
+  * The "while waiting for Woody" release.
+  * New upstream release. 
+  * This release closes: BUG#148270 reported by Tuukka Toivonen, thanks!
+  * Fix error checking in debian/rules.
+  * libpari1-dev: Install dft.Config.in in usr/lib/pari for gp2c.
+  * libpari1-dev Provides: libpari-dev.
+
+ -- Bill Allombert <ballombe@debian.org>  Sun, 23 Jun 2002 16:53:37 +0200
+
+pari (2.1.3-1) unstable; urgency=low
+
+  * The "hppa should build now." release.
+  * New upstream release. This is a bugfix-only release that solves
+  several buffer overflows.
+  * Remove bashism in debian/rules.
+  * Link with gcc instead of ld. Closes: BUG#121685
+  thanks to Matthew Wilcox <willy@debian.org>. 
+  * Add tips about readline configuration.
+  * Disable strictmatch in /etc/gprc.
+  * Fix manpages links that I manage to break in the previous version.
+
+ -- Bill Allombert <ballombe@debian.org>  Fri, 11 Jan 2002 13:15:04 +0100
+
+pari (2.1.2-1) unstable; urgency=low
+
+  * The "I don't support broken compilers." release.
+  * New upstream release. Closes: BUG#112909
+  * Force compiling with gcc-3.0 on archs where gcc-2.95 is too broken.
+  * New description.
+  * Compile libpari.so with -fPIC on archs using C kernel. On the others archs
+  I cannot fix the assembly files to be PIC.
+  * Remove spurious files Makefile and paricfg.tex.in in /usr/share/pari/doc
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 20 Nov 2001 22:39:19 +0100
+
+pari (2.1.1-3) unstable; urgency=low
+
+  * Assembly kernel for m68k do not follow GNU as syntax. Use the C kernel
+  for m68k instead. Closes: BUG#99720
+  * Suppress redundant `(ix86 kernel)' in GP header on i386.
+  * pari-doc must depend on tetex-extra.
+
+ -- Bill Allombert <ballombe@debian.org>  Mon, 11 Jun 2001 18:49:45 +0200
+
+pari (2.1.1-2) unstable; urgency=low
+
+  * Build-Depends on libreadline4-dev and xlib6g-dev to be sure readline and
+  X11 support is compiled in. 
+  * Tex doc use eufm10, need to Build-Depends on tetex-extra. Closes: BUG#99393 
+  * Fix sections of pari-doc, libpari1 and libpari1-dev.
+  * Add lintian overrides.
+  * Patch config/endian.c to work on arm.
+  * Remove symlinks created by Configure in debian/rules clean.
+  * Use DEB_HOST_GNU_CPU in place of DEB_BUILD_GNU_CPU to be less broken wrt
+  cross compilers.
+
+ -- Bill Allombert <ballombe@debian.org>  Thu, 31 May 2001 18:30:47 +0200
+
+pari (2.1.1-1) unstable; urgency=low
+
+  * Initial Release. Closes: BUG#79621
+
+ -- Bill Allombert <ballombe@debian.org>  Tue, 20 Feb 2001 01:12:10 +0100
+
+Local variables:
+mode: debian-changelog
+End:
